@@ -2,7 +2,32 @@
 <html>
   <head>
     <title>Capitals Quiz</title>
-    <meta name="viewport" content="width=device-width" initial-scale="1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+      body {
+        box-sizing: border-box;
+        margin: 1rem;
+        text-align: center;
+      }
+      button {
+        position: absolute;
+        bottom: 2rem;
+        left: 1rem;
+        padding: 1rem;
+        width: calc(100% - 2rem);
+      }
+      #state,
+      #answer {
+        font-size: 24px;
+      }
+      @media (min-width: 500px) {
+        button {
+          position: unset;
+          margin-top: 4rem;
+          width: fit-content;
+        }
+      }
+    </style>
   </head>
   <body>
     <h1>Capitals Quiz</h1>
