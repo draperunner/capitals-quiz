@@ -9,7 +9,7 @@
         margin: 1rem;
         text-align: center;
       }
-      button {
+      #button {
         position: absolute;
         bottom: 2rem;
         left: 1rem;
@@ -21,7 +21,7 @@
         font-size: 24px;
       }
       @media (min-width: 500px) {
-        button {
+        #button {
           position: unset;
           margin-top: 4rem;
           width: fit-content;
@@ -31,6 +31,10 @@
   </head>
   <body>
     <h1>Capitals Quiz</h1>
+    <select id="quiz-selector" onchange="onQuizChange()">
+      <option value="us">US States</option>
+      <option value="eu">Europeiske hovedsteder</option>
+    </select>
     <p>What's the capital of ...</p>
     <p id="state"></p>
     <p id="answer" style="visibility: hidden"></p>
@@ -92,6 +96,55 @@
         { state: "Wyoming", capital: "Cheyenne" },
       ];
 
+      const EUROPEAN_CAPITALS = [
+        { capital: "Amsterdam", state: "Nederland" },
+        { capital: "Andorra la Vella", state: "Andorra" },
+        { capital: "Ankara", state: "Tyrkia" },
+        { capital: "Athen", state: "Hellas" },
+        { capital: "Beograd", state: "Serbia" },
+        { capital: "Berlin", state: "Tyskland" },
+        { capital: "Bern", state: "Sveits" },
+        { capital: "Bratislava", state: "Slovakia" },
+        { capital: "Brussel", state: "Belgia" },
+        { capital: "Budapest", state: "Ungarn" },
+        { capital: "București", state: "Romania" },
+        { capital: "Chișinău", state: "Moldova" },
+        { capital: "Dublin", state: "Irland" },
+        { capital: "Helsingfors", state: "Finland" },
+        { capital: "Kyiv", state: "Ukraina" },
+        { capital: "København", state: "Danmark" },
+        { capital: "Lisboa", state: "Portugal" },
+        { capital: "Ljubljana", state: "Slovenia" },
+        { capital: "London", state: "Storbritannia" },
+        { capital: "Luxembourg", state: "Luxembourg" },
+        { capital: "Madrid", state: "Spania" },
+        { capital: "Minsk", state: "Belarus" },
+        { capital: "Monaco", state: "Monaco" },
+        { capital: "Moskva", state: "Russland" },
+        { capital: "Oslo", state: "Norge" },
+        { capital: "Paris", state: "Frankrike" },
+        { capital: "Podgorica", state: "Montenegro" },
+        { capital: "Praha", state: "Tsjekkia" },
+        { capital: "Priština", state: "Kosovo" },
+        { capital: "Reykjavík", state: "Island" },
+        { capital: "Riga", state: "Latvia" },
+        { capital: "Roma", state: "Italia" },
+        { capital: "San Marino", state: "San Marino San" },
+        { capital: "Sarajevo", state: "Bosnia-Hercegovina" },
+        { capital: "Skopje", state: "Nord-Makedonia" },
+        { capital: "Sofia", state: "Bulgaria" },
+        { capital: "Stockholm", state: "Sverige" },
+        { capital: "Tallinn", state: "Estland" },
+        { capital: "Tirana", state: "Albania" },
+        { capital: "Vaduz", state: "Liechtenstein" },
+        { capital: "Valletta", state: "Malta" },
+        { capital: "Vatikanstaten", state: "Vatikanstaten" },
+        { capital: "Vilnius", state: "Litauen" },
+        { capital: "Warszawa", state: "Polen" },
+        { capital: "Wien", state: "Østerrike" },
+        { capital: "Zagreb", state: "Kroatia" },
+      ];
+
       let capitals = [...US_STATE_CAPITALS];
 
       const getRandomQuestion = () => {
@@ -123,13 +176,23 @@
         document.getElementById("button").innerText = "Next question";
       };
 
-      window.buttonClick = () => {
+      const buttonClick = () => {
         if (answerRevealed) {
           setNewQuestion();
         } else {
           revealAnswer();
         }
         answerRevealed = !answerRevealed;
+      };
+
+      const onQuizChange = (e) => {
+        const { value } = document.getElementById("quiz-selector");
+        if (value === "eu") {
+          capitals = [...EUROPEAN_CAPITALS];
+        } else {
+          capitals = [...US_STATE_CAPITALS];
+        }
+        setQuestion();
       };
     </script>
   </body>
